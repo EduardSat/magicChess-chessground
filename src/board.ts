@@ -224,10 +224,10 @@ export function unselect(state: HeadlessState): void {
 
 function isMovable(state: HeadlessState, orig: cg.Key): boolean {
   const piece = state.pieces.get(orig);
-  // const isNotCustom = piece?.role !== 'mine' && piece?.role !== 'cheese';
+  const isNotCustom = piece?.role !== 'mine' && piece?.role !== 'cheese';
 
   return (
-    !!piece &&
+    !!piece && isNotCustom &&
     (state.movable.color === 'both' ||
       (state.movable.color === piece.color && state.turnColor === piece.color))
   );
@@ -239,11 +239,9 @@ export const canMove = (state: HeadlessState, orig: cg.Key, dest: cg.Key): boole
   (state.movable.free || !!state.movable.dests?.get(orig)?.includes(dest));
 
 function canDrop(state: HeadlessState, orig: cg.Key, dest: cg.Key): boolean {
-  const piece = state.pieces.get(orig);
-  const cheesePiece = piece?.role === 'cheese';
-
+  const piece = state.pieces.get(orig);  
   return (
-    !!piece && !cheesePiece && 
+    !!piece && 
     (orig === dest || !state.pieces.has(dest)) &&
     (state.movable.color === 'both' ||
       (state.movable.color === piece.color && state.turnColor === piece.color))
