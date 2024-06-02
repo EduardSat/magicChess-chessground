@@ -25,7 +25,6 @@
     "typescript": "^5.4.5"
   },
   "scripts": {
-    "prepare": "%npm_execpath% run compile",
     "compile": "tsc --sourceMap --declaration",
     "lint": "eslint src/*.ts",
     "format": "prettier --write .",
