@@ -240,8 +240,10 @@ export const canMove = (state: HeadlessState, orig: cg.Key, dest: cg.Key): boole
 
 function canDrop(state: HeadlessState, orig: cg.Key, dest: cg.Key): boolean {
   const piece = state.pieces.get(orig);
+  const cheesePiece = piece?.role === 'cheese';
+
   return (
-    !!piece &&
+    !!piece && !cheesePiece && 
     (orig === dest || !state.pieces.has(dest)) &&
     (state.movable.color === 'both' ||
       (state.movable.color === piece.color && state.turnColor === piece.color))
