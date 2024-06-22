@@ -224,10 +224,10 @@ export function unselect(state: HeadlessState): void {
 
 function isMovable(state: HeadlessState, orig: cg.Key): boolean {
   const piece = state.pieces.get(orig);
-  const isNotCustom = piece?.role !== 'mine' && piece?.role !== 'cheese';
+  // const isNotCustom = piece?.role !== 'mine' && piece?.role !== 'cheese';
 
   return (
-    !!piece && isNotCustom &&
+    !!piece &&
     (state.movable.color === 'both' ||
       (state.movable.color === piece.color && state.turnColor === piece.color))
   );
